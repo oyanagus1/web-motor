@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Jual Beli Motor Honda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #1e3a8a;
+            cursor: pointer;
+            margin-top: -8px; 
+            border: 4px solid white;
+            box-shadow: 0 0 0 1px #1e3a8a;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-white rounded-full p-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Honda_Logo.svg/120px-Honda_Logo.svg.png" alt="Honda Logo" class="h-6">
+                </div>
+                <span class="font-bold text-lg">DAYA MOTOR</span>
+            </div>
+            <div class="text-sm hidden md:block">Pricelist Tunai dan Simulasi Kredit</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 lg:p-8 mt-4">
+        
+        <div class="mb-8">
+            <h1 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">Simulasi Kredit Honda</h1>
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-blue-900 leading-tight">Motor pilihanmu.<br><span class="text-gray-500 font-normal">Cicilan sesuai rencanamu.</span></h2>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+            
+            <!-- KOLOM 1: Info Motor -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 lg:w-1/3 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold text-gray-400 tracking-wider">HONDA</span>
+                        <select id="select-motor" class="border border-gray-200 rounded-lg p-1.5 text-xs font-bold text-blue-900 focus:outline-none">
+                            <option value="">Pilih motor...</option>
+                        </select>
+                    </div>
+                    <h2 id="display-nama-motor" class="text-2xl font-black text-blue-950 mb-6 uppercase">BEAT CBS NEW</h2>
+                    
+                    <div class="flex justify-center mb-8">
+                       <div class="w-48 h-48 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 text-sm font-semibold shadow-inner">
+                           [Foto Motor]
+                       </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500 mb-1">Harga OTR</p>
+                    <p id="display-harga-otr" class="text-3xl font-black text-blue-950">Rp 19.675.000</p>
+                    <p class="text-xs text-gray-400 mt-2 text-right">Bandung & Jawa Barat</p>
+                </div>
+            </div>
+
+            <!-- KOLOM 2: Pengaturan DP & Tenor -->
+            <div class="lg:w-1/3 flex flex-col gap-6">
+                <!-- Card DP -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="font-bold text-blue-950 mb-4 flex items-center gap-2">Atur cicilanmu</h3>
+                    
+                    <p class="text-sm text-gray-500 mb-1">Uang muka (DP)</p>
+                    <p id="display-dp-text" class="text-3xl font-black text-blue-900 mb-6">Rp 2.000.000</p>
+
+                    <div class="mb-4">
+                        <input type="range" id="slider-dp" min="0" max="0" value="0" class="w-full mb-2">
+                        <div class="flex justify-between text-xs text-gray-400">
+                            <span id="dp-min-label">Rp 2.000.000</span>
+                            <span id="dp-max-label">Rp 5.000.000</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-400 mb-2" id="info-pilihan-dp">Pilihan DP tersedia</p>
+                    
+                    <select id="select-dp" class="w-full border border-gray-200 rounded-lg p-3 text-blue-950 font-bold focus:outline-none focus:border-blue-900 text-sm">
+                        <option value="">Pilih DP...</option>
+                    </select>
+                </div>
+
+                <!-- Card Tenor -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="font-bold text-blue-950 mb-4">Lama cicilan</h3>
+                    <div class="flex flex-wrap gap-2" id="tenor-buttons-container">
+                        <!-- Tenor button -->
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4">Pilih lama cicilan. Angsuran langsung mengikuti pilihanmu.</p>
+                </div>
+            </div>
+
+            <!-- KOLOM 3: Hasil Angsuran & Ringkasan -->
+            <div class="lg:w-1/3 flex flex-col gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-blue-900">
+                    <h3 class="font-bold text-blue-950 mb-4">Angsuran per bulan</h3>
+                    <p id="display-angsuran-text" class="text-4xl font-black text-blue-900 mb-6">Rp 0<span class="text-sm font-normal text-gray-500"> /bulan</span></p>
+
+                    <div class="bg-blue-50 rounded-xl p-4 mt-6">
+                        <h4 class="font-bold text-blue-950 text-sm mb-3">Ringkasan simulasi</h4>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-500">DP</span>
+                            <span class="font-bold text-blue-900" id="ringkasan-dp">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-500">Tenor</span>
+                            <span class="font-bold text-blue-900" id="ringkasan-tenor">0 bulan</span>
+                        </div>
+                        <div class="flex justify-between text-xs pt-2 border-t border-blue-200 mt-2">
+                            <span class="text-gray-500">Angsuran</span>
+                            <span class="font-bold text-blue-900" id="ringkasan-angsuran">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <label class="block text-sm font-bold text-blue-950 mb-2">Nama kamu (opsional)</label>
+                    <input type="text" id="input-nama" placeholder="Supaya kami bisa menyapamu" class="w-full border border-gray-200 rounded-lg p-3 mb-4 text-sm focus:outline-none focus:border-blue-900">
+                    
+                    <button onclick="kirimWa()" class="w-full bg-blue-950 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all text-sm">
+                        Ajukan promo lewat WhatsApp
+                    </button>
+                    <p class="text-xs text-gray-400 mt-3 text-center">Tanyakan promo untuk DP dan cicilan pilihanmu.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- DATABASE LOKAL & LOGIKA WEBSITE -->
+    <script>
+        // Database dibaca dari file database.json di folder yang sama.
+        // Jalankan lewat VS Code + Live Server agar fetch() bekerja.
+        let seluruhData = [];
+
+        let motorAktif = "";
+        let dpAktif = 0;
+        let tenorAktif = 35;
+        
+        const formatRp = (angka) => 'Rp ' + parseInt(angka || 0).toLocaleString('id-ID');
+
+        function inisialisasiWeb() {
+            const listProduk = [...new Set(seluruhData.map(d => d.produk))].filter(Boolean);
+            
+            const selectMotor = document.getElementById('select-motor');
+            selectMotor.innerHTML = '';
+            listProduk.forEach(prod => {
+                let opt = document.createElement('option');
+                opt.value = prod;
+                opt.innerText = prod;
+                selectMotor.appendChild(opt);
+            });
+
+            if (listProduk.length > 0) {
+                motorAktif = listProduk[0];
+                selectMotor.value = motorAktif;
+                muatDataMotor(motorAktif);
+            }
+
+            selectMotor.addEventListener('change', (e) => {
+                motorAktif = e.target.value;
+                muatDataMotor(motorAktif);
+            });
+        }
+
+        function muatDataMotor(namaProduk) {
+            const dataMotor = seluruhData.filter(d => d.produk === namaProduk);
+            if (dataMotor.length === 0) return;
+
+            document.getElementById('display-nama-motor').innerText = namaProduk;
+            document.getElementById('display-harga-otr').innerText = dataMotor[0].harga_otr ? formatRp(dataMotor[0].harga_otr) : 'Belum tersedia';
+
+            const listDp = [...new Set(dataMotor.map(d => d.uang_muka))].sort((a, b) => a - b);
+            
+            const sliderDp = document.getElementById('slider-dp');
+            const selectDp = document.getElementById('select-dp');
+
+            sliderDp.min = 0;
+            sliderDp.max = listDp.length - 1;
+            sliderDp.value = 0;
+            dpAktif = listDp[0];
+
+            document.getElementById('dp-min-label').innerText = formatRp(listDp[0]);
+            document.getElementById('dp-max-label').innerText = formatRp(listDp[listDp.length - 1]);
+            document.getElementById('info-pilihan-dp').innerText = `${listDp.length} pilihan DP tersedia`;
+
+            selectDp.innerHTML = '';
+            listDp.forEach(dp => {
+                let opt = document.createElement('option');
+                opt.value = dp;
+                opt.innerText = formatRp(dp);
+                selectDp.appendChild(opt);
+            });
+
+            const listTenor = [...new Set(dataMotor.map(d => d.tenor_bulan))].sort((a, b) => a - b);
+            const containerTenor = document.getElementById('tenor-buttons-container');
+            containerTenor.innerHTML = '';
+
+            listTenor.forEach((tenor, idx) => {
+                let btn = document.createElement('button');
+                btn.className = `tenor-btn flex-1 border border-gray-300 rounded-lg py-2 font-bold text-sm text-gray-700 hover:bg-gray-50 ${idx === listTenor.length - 1 ? 'bg-blue-900 text-white border-blue-900 active' : ''}`;
+                btn.innerText = tenor + ' bln';
+                btn.onclick = () => {
+                    document.querySelectorAll('.tenor-btn').forEach(b => {
+                        b.classList.remove('bg-blue-900', 'text-white', 'border-blue-900', 'active');
+                    });
+                    btn.classList.add('bg-blue-900', 'text-white', 'border-blue-900', 'active');
+                    tenorAktif = tenor;
+                    kalkulasiHasil(dataMotor);
+                };
+                containerTenor.appendChild(btn);
+            });
+
+            if (listTenor.length > 0) {
+                tenorAktif = listTenor[listTenor.length - 1];
+            }
+
+            sliderDp.oninput = (e) => {
+                let index = parseInt(e.target.value);
+                dpAktif = listDp[index];
+                selectDp.value = dpAktif;
+                kalkulasiHasil(dataMotor);
+            };
+
+            selectDp.onchange = (e) => {
+                dpAktif = parseInt(e.target.value);
+                let index = listDp.indexOf(dpAktif);
+                sliderDp.value = index;
+                kalkulasiHasil(dataMotor);
+            };
+
+            kalkulasiHasil(dataMotor);
+        }
+
+        function kalkulasiHasil(dataMotor) {
+            const barisCocok = dataMotor.find(d => d.uang_muka === dpAktif && d.tenor_bulan === tenorAktif);
+            const angsuran = barisCocok ? barisCocok.angsuran : 0;
+            const hargaOtr = dataMotor.length > 0 ? (dataMotor[0].harga_otr || 0) : 0;
+
+            document.getElementById('display-dp-text').innerText = formatRp(dpAktif);
+            document.getElementById('display-angsuran-text').innerHTML = `${formatRp(angsuran)}<span class="text-sm font-normal text-gray-500"> /bulan</span>`;
+            
+            document.getElementById('ringkasan-dp').innerText = formatRp(dpAktif);
+            document.getElementById('ringkasan-tenor').innerText = tenorAktif + ' bulan';
+            document.getElementById('ringkasan-angsuran').innerText = formatRp(angsuran);
+            
+            window.dataTerpilih = { motor: motorAktif, otr: hargaOtr, dp: dpAktif, tenor: tenorAktif, angsuran: angsuran };
+        }
+
+        function kirimWa() {
+            if (!window.dataTerpilih) return;
+            const d = window.dataTerpilih;
+            const nama = document.getElementById('input-nama').value.trim();
+            const sapaan = nama ? `Halo, saya ${nama}. ` : `Halo, `;
+            
+            // GANTI DENGAN NOMOR WHATSAPP ANDA (Diawali 62)
+            const nomorWa = '6281234567890'; 
+            
+            const pesan = `${sapaan}Saya tertarik dengan promo motor *${d.motor}*.
+- OTR: ${formatRp(d.otr)}
+- DP: ${formatRp(d.dp)}
+- Tenor: ${d.tenor} bulan
+- Angsuran: ${formatRp(d.angsuran)} / bulan.
+
+Apakah unit ready? Mohon info persyaratannya.`;
+            
+            window.open(`https://wa.me/${nomorWa}?text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+
+        // Load database.json sebelum website diinisialisasi
+        async function mulaiWeb() {
+            try {
+                const response = await fetch('./database.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status} saat membaca database.json`);
+                }
+
+                seluruhData = await response.json();
+
+                if (!Array.isArray(seluruhData) || seluruhData.length === 0) {
+                    throw new Error('database.json kosong atau formatnya bukan array.');
+                }
+
+                inisialisasiWeb();
+            } catch (error) {
+                console.error(error);
+                document.getElementById('display-nama-motor').innerText = 'Database gagal dimuat';
+                document.getElementById('display-harga-otr').innerText = '-';
+                alert(
+                    'Database gagal dimuat. Pastikan database.json berada di folder yang sama dengan index.html dan buka menggunakan VS Code Live Server.'
+                );
+            }
+        }
+
+        mulaiWeb();
+    </script>
+</body>
+</html>
